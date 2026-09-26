@@ -13,6 +13,7 @@
 
   /* Khoảng cách CỐ ĐỊNH giữa các card (không đổi theo kích thước màn hình) */
   --gap:16px;
+  --masonry-row:1px;
   /* Bề rộng tối đa của 1 card */
   --card-w:350px;
 
@@ -29,7 +30,10 @@
   --fs-divider: clamp(12px,   5.75cqw, 18px);
   --fs-row:     clamp(11px,   5.25cqw, 16.5px);
   --fs-lead:    clamp(10.5px, 4.90cqw, 15.5px);
-  --fs-note:    clamp(10px,   4.45cqw, 14px);
+  /* Note có 3 bậc rõ ràng: YouTube nhỏ, note thường ở giữa, Netflix lớn. */
+  --fs-note-small:  clamp(8px,  3.45cqw, 11px);
+  --fs-note:        clamp(9px,  3.95cqw, 12.5px);
+  --fs-note-large:  clamp(10px, 4.45cqw, 14px);
 }
 
 *{box-sizing:border-box;}
@@ -130,14 +134,18 @@ html,body{
 
 /* ================= MAIN GRID ================= */
 .grid{
+  --card-gap:var(--gap);
   flex:1;
   display:grid;
   /* Cột rộng tối đa = --card-w, nên khoảng cách giữa các card LUÔN bằng --gap,
      không phình ra khi màn hình to. Đổi --gap / --card-w để chỉnh. */
   grid-template-columns:repeat(3, minmax(0, var(--card-w)));
-  grid-template-rows:repeat(3, auto);
+  /* Mặc định an toàn: hàng cao tự nhiên. JS chỉ bật masonry sau khi đã
+     tính xong chiều cao, nên trang không thể chồng card nếu script lỗi. */
+  grid-auto-rows:max-content;
   justify-content:center;      /* dồn 3 cột vào giữa, phần dư ra 2 bên mép */
-  align-content:safe center;   /* căn giữa dọc, nhưng KHÔNG cắt mất phần trên khi tràn */
+  align-content:safe center;
+  align-items:start;
   justify-items:stretch;
   gap:var(--gap);
   padding:var(--gap);
@@ -147,6 +155,14 @@ html,body{
   height:100vh;
   overflow-y:auto;
   overflow-x:hidden;
+}
+
+.grid.masonry-ready{
+  grid-auto-rows:var(--masonry-row);
+  grid-auto-flow:row dense;
+  align-content:start;
+  column-gap:var(--card-gap);
+  row-gap:0;
 }
 
 .card{
@@ -162,8 +178,10 @@ html,body{
   cursor:pointer;
   position:relative;
   width:100%;
-max-width:var(--card-w); /* đổi --card-w ở :root để chỉnh width card */
-margin:0 auto;
+  height:max-content;
+  align-self:start;
+  max-width:var(--card-w); /* đổi --card-w ở :root để chỉnh width card */
+  margin:0 auto;
 /* Biến card thành "container": mọi cỡ chữ bên trong tính theo BỀ NGANG CARD
    (đơn vị cqw), nên tỉ lệ chữ giống hệt nhau trên laptop, màn to lẫn điện thoại. */
 container-type:inline-size;
@@ -179,9 +197,9 @@ container-type:inline-size;
 }
 
 .card-head{
-  margin-top: 12px;
+  margin-top:6px;
   margin-bottom:4px;
-  margin-left: 4px;
+  margin-left:4px;
 }
 .card-head::after{
   content:"";
@@ -222,6 +240,7 @@ container-type:inline-size;
   object-fit:cover;
   display:block;
 }
+
 .icon-pair{
   display:flex;
   gap:6px;
@@ -265,7 +284,7 @@ container-type:inline-size;
 }
 
 .info{
-  margin-top:4px;
+  margin-top:2px;
 }
 
 /* Thanh "——— TIÊU ĐỀ ———"
@@ -308,8 +327,19 @@ container-type:inline-size;
   font-weight:600;
   margin:0 0 2px;
   text-align:center;
-  white-space:nowrap;   /* ép nằm 1 dòng, không xuống hàng */
-  overflow:hidden;      /* chốt chặn nếu JS auto-fit chưa chạy */
+  line-height:1.2;
+  white-space:normal;
+  overflow:visible;
+}
+
+.card-netflix .note{
+  font-size:var(--fs-note-large);
+  white-space:nowrap;
+  overflow:hidden;
+}
+
+.card-youtube .note{
+  font-size:var(--fs-note-small);
 }
 
 .row{
@@ -322,12 +352,80 @@ container-type:inline-size;
   text-align:center;
 }
 
+.price-row{
+  display:grid;
+  align-items:baseline;
+  justify-content:center;
+  width:max-content;
+  max-width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left;
+}
+
+.price-row > *{grid-row:1;}
+.price-term{grid-column:1;text-align:left;}
+.old-price{grid-column:2;text-align:left;}
+.discount-label{grid-column:3;text-align:left;}
+.final-price{grid-column:4;text-align:left;color:var(--black);}
+
+/* Dòng có khuyến mãi: 4 cột kiểu setw, cả cụm tự ôm nội dung và nằm giữa. */
+.price-row:has(.discount-label:not(:empty)){
+  grid-template-columns:9ch 5ch 10ch 5ch;
+  column-gap:var(--price-gap, 1.1ch);
+}
+.price-row.price-row-wide:has(.discount-label:not(:empty)){
+  font-size:var(--fs-row);
+}
+.price-row:has(.discount-label:not(:empty)) .final-price{
+  color:var(--red);
+}
+
+/* Dòng không giảm giá: chỉ hiển thị [loại] [giá], rồi căn giữa cả dòng. */
+.price-row:not(:has(.discount-label:not(:empty))){
+  grid-template-columns:max-content max-content;
+  column-gap:var(--price-gap, 1.1ch);
+}
+.price-row:not(:has(.discount-label:not(:empty))) .old-price,
+.price-row:not(:has(.discount-label:not(:empty))) .discount-label{
+  display:none;
+}
+.price-row:not(:has(.discount-label:not(:empty))) .final-price{
+  grid-column:2;
+  text-align:left;
+}
+
 b{font-weight:800;}
 .blue{color:var(--blue);}
 .red{color:var(--red);}
 .green{color:var(--green);}
 .orange{color:var(--orange);}
 .black{color:var(--black);}
+
+.more-link{
+  color:var(--blue);
+  font-style:normal;
+  font-weight:800;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.more-link:hover{color:var(--red);}
+
+/* Phần làm mới chỉ áp dụng cho desktop. Responsive điện thoại bên dưới
+   giữ nguyên đúng layout và style cũ. */
+@media (min-width:861px){
+  .card{
+    border-width:1.5px;
+    border-radius:16px;
+    box-shadow:0 3px 0 rgba(0,0,0,0.14), 0 8px 18px rgba(21,81,54,0.07);
+  }
+  .card:hover,
+  .card:focus-within,
+  .card:active{
+    transform:translateY(-4px);
+    box-shadow:0 12px 24px rgba(0,0,0,0.18);
+  }
+}
 
 /* ================= RESPONSIVE / MOBILE ================= */
 @media (max-width: 860px){
@@ -402,10 +500,12 @@ b{font-weight:800;}
   }
 
   .grid{
+    --card-gap:6px;
     grid-template-columns:repeat(2, minmax(0, 1fr));
-    grid-template-rows:none;
+    grid-auto-rows:max-content;
     justify-content:stretch;   /* mobile: card giãn full 2 cột */
     align-content:start;
+    align-items:start;
     height:auto;
     overflow:visible;
     gap:6px;
@@ -434,4 +534,3 @@ b{font-weight:800;}
   .grid{grid-template-columns:repeat(2, 1fr);}
   .sidebar{column-gap:6px; padding:10px 10px;}
 }
-
