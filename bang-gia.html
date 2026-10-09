@@ -10,7 +10,8 @@
     href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=17">
-<script src="main.js?v=12" defer></script>
+<script src="main.js?v=13" defer></script>
+  <script type="module" src="prices-view.js?v=1"></script>
 </head>
 
 <body>
@@ -36,6 +37,7 @@
 
     <!-- MAIN GRID -->
     <main class="grid">
+      <p id="price-status" role="status" style="grid-column:1/-1;text-align:center">Đang tải bảng giá…</p>
 
       <!-- NETFLIX -->
       <article class="card card-netflix">
@@ -48,15 +50,15 @@
         </header>
         <div class="info">
           <p class="divider">LOẠI <b class="red">DÙNG CHUNG</b></p>
-          <p class="row price-row"><b class="red price-term">5 NGÀY</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">19K</b></p>
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price">80K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">49K</b></p>
-          <p class="row price-row"><b class="red price-term">3 THÁNG</b><span class="old-price">240K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">99K</b></p>
-          <p class="row price-row"><b class="red price-term">6 THÁNG</b><span class="old-price">480K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">179K</b></p>
+          <template data-price-group="netflix-premium-1"></template>
+          
+          
+          
 
           <p class="divider">LOẠI PRO - <b class="red">DÙNG RIÊNG</b></p>
           <p class="note">(SET ĐƯỢC <b class="blue">MÃ PIN - MẬT KHẨU</b>)</p>
-          <p class="row price-row"><b class="red price-term">ADD FAMILY - 1 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">79K</b></p>
-          <p class="row price-row"><b class="red price-term">EXTRA SLOT - 1 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">89K</b></p>
+          <template data-price-group="netflix-premium-2"></template>
+          
           <p class="note"><a class="more-link"
               href="https://docs.google.com/document/u/0/d/1YgoclAA87QSl13pFtw6LX1NYbQ-Z-ZY0a-XuO37Ne4Q/mobilebasic"
               target="_blank" rel="noopener noreferrer">GIẢI THÍCH GÓI EXTRA</a></p>
@@ -75,15 +77,15 @@
           <p class="divider">DÙNG RIÊNG - <b class="red">ADD FAMILY</b></p>
           <p class="note">ADD FAMILY MỚI MỖI THÁNG. ĐỔI FAM LIÊN TỤC, KHÔNG CẦN ĐỔI
             MAIL. CHỈ RỜI FAM KHI MAIL BÁO “NHÓM GIA ĐÌNH KHÔNG CÒN HOẠT ĐỘNG”</p>
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price">60K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">24K</b></p>
-          <p class="row price-row"><b class="red price-term">3 THÁNG</b><span class="old-price">180K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">64K</b></p>
-          <p class="row price-row"><b class="red price-term">6 THÁNG</b><span class="old-price">360K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">119K</b></p>
-          <p class="row price-row"><b class="red price-term">12 THÁNG</b><span class="old-price">720K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">229K</b></p>
+          <template data-price-group="youtube-premium-1"></template>
+          
+          
+          
           <p class="divider">DÙNG RIÊNG - <b class="red">FAMILY CỐ ĐỊNH</b></p>
           <p class="note">ADD VÀO FAMILY VÀ DÙNG ĐẾN HẾT THỜI HẠN GÓI, KHÔNG CẦN PHẢI THOÁT MỖI THÁNG</p>
-          <p class="row price-row"><b class="red price-term">3 THÁNG</b><span class="old-price">360K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">169K</b></p>
-          <p class="row price-row"><b class="red price-term">6 THÁNG</b><span class="old-price">720K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">289K</b></p>
-          <p class="row price-row"><b class="red price-term">12 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">489K</b></p>
+          <template data-price-group="youtube-premium-2"></template>
+          
+          
         </div>
       </article>
 
@@ -92,16 +94,16 @@
         <header class="card-head">
           <div class="icon-slot" data-icon="chatgpt"><img src="assets/chatgpt.png" alt="ChatGPT"
               onerror="this.style.display='none'"></div>
-          <h2>ChatGPT Plus</h2>
+          <h2>ChatGPT</h2>
           <p class="lead">ĐĂNG NHẬP ĐƯỢC <b class="blue">MỌI THIẾT BỊ</b></p>
         </header>
         <div class="info">
           <p class="divider">XÀI CHUNG <b class="red">(2-4 NGƯỜI)</b></p>
-          <p class="row price-row"><b class="red price-term">1 THÁNG PLUS</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">79K</b></p>
-          <p class="row price-row"><b class="red price-term">3 THÁNG PLUS</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">199K</b></p>
+          <template data-price-group="chatgpt-1"></template>
+          
 
           <p class="divider">XÀI <b class="red">RIÊNG</b></p>
-          <p class="row price-row price-row-wide"><b class="red price-term">1 THÁNG PLUS</b><span class="old-price">400K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">345K</b></p>
+          <template data-price-group="chatgpt-2"></template>
         </div>
       </article>
 
@@ -123,10 +125,10 @@
               GOOGLE PHOTO + NOTEBOOKLM, ANTIGRAVITY, VEO3...</b></p>
         </header>
         <div class="info">
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price">80K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">49K</b></p>
-          <p class="row price-row"><b class="red price-term">3 THÁNG</b><span class="old-price">240K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">119K</b></p>
-          <p class="row price-row"><b class="red price-term">6 THÁNG</b><span class="old-price">340K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">199K</b></p>
-          <p class="row price-row"><b class="red price-term">12 THÁNG</b><span class="old-price">480K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">259K</b></p>
+          <template data-price-group="combo-google-one-1"></template>
+          
+          
+          
         </div>
       </article>
 
@@ -148,8 +150,8 @@
         </header>
         <div class="info">
           <p class="divider">NÂNG <b class="red">CHÍNH CHỦ</b></p>
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">69K</b></p>
-          <p class="row price-row"><b class="red price-term">3 THÁNG</b><span class="old-price">180K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">169K</b></p>
+          <template data-price-group="combo-apple-one-1"></template>
+          
 
         </div>
       </article>
@@ -164,20 +166,20 @@
         </header>
         <div class="info">
           <p class="divider"><b class="red">CANVA EDU</b></p>
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">20K</b></p>
-          <p class="row price-row"><b class="red price-term">1 NĂM</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">69K</b></p>
+          <template data-price-group="canva-1"></template>
+          
 
           <p class="divider"><b class="red">CANVA PRO</b></p>
           <p class="note">ADD TEAM</p>
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">25K</b></p>
-          <p class="row price-row"><b class="red price-term">6 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">69K</b></p>
-          <p class="row price-row"><b class="red price-term">1 NĂM</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">79K</b></p>
+          <template data-price-group="canva-2"></template>
+          
+          
 
           <p class="divider"><b class="red">CANVA BUSINESS</b></p>
           <p class="note">(PRO) - CẤP TÀI KHOẢN ADMIN - ADD TỐI ĐA 100 NGƯỜI/TRONG 1 THÁNG</p>
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">30K</b></p>
-          <p class="row price-row"><b class="red price-term">3 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">69K</b></p>
-          <p class="row price-row"><b class="red price-term">1 NĂM</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">89K</b></p>
+          <template data-price-group="canva-3"></template>
+          
+          
         </div>
       </article>
 
@@ -190,10 +192,10 @@
           <p class="lead">CẤP ACC, <b class="blue">DÙNG RIÊNG</b><br>SỬ DỤNG TỐI ĐA 2 THIẾT BỊ</p>
         </header>
         <div class="info">
-          <p class="row price-row"><b class="red price-term">7 NGÀY</b><span class="old-price">30K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">19K</b></p>
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price">120K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">49K</b></p>
-          <p class="row price-row"><b class="red price-term">3 THÁNG</b><span class="old-price">360K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">149K</b></p>
-          <p class="row price-row"><b class="red price-term">6 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">289K</b></p>
+          <template data-price-group="capcut-pro-1"></template>
+          
+          
+          
           <p class="note">CHỈ GÓI 6 THÁNG ĐƯỢC THAY ĐỔI THÔNG TIN MAIL</p>
         </div>
       </article>
@@ -208,10 +210,10 @@
           <p class="lead">GÓI CHÍNH CHỦ <b class="blue">IB SỐP</b></p>
         </header>
         <div class="info">
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price">30K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">25K</b></p>
-          <p class="row price-row"><b class="red price-term">3 THÁNG</b><span class="old-price">90K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">49K</b></p>
-          <p class="row price-row"><b class="red price-term">6 THÁNG</b><span class="old-price">120K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">89K</b></p>
-          <p class="row price-row"><b class="red price-term">1 NĂM</b><span class="old-price">240K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">199K</b></p>
+          <template data-price-group="super-duolingo-1"></template>
+          
+          
+          
         </div>
       </article>
 
@@ -228,8 +230,8 @@
           <p class="lead">GÓI PREMIUM - <b class="blue">NÂNG CHÍNH CHỦ</b></p>
         </header>
         <div class="info">
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price">40K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">29K</b></p>
-          <p class="row price-row"><b class="red price-term">3 THÁNG</b><span class="old-price">120K</span><b class="green discount-label">GIẢM CÒN</b><b class="final-price">79K</b></p>
+          <template data-price-group="quizlet-studocu-1"></template>
+          
         </div>
       </article>
 
@@ -244,8 +246,8 @@
           <p class="lead">GÓI PREMIUM - <b class="blue">NÂNG CHÍNH CHỦ</b></p>
         </header>
         <div class="info">
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">59K</b></p>
-          <p class="row price-row"><b class="red price-term">3 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">159K</b></p>
+          <template data-price-group="scribd-1"></template>
+          
         </div>
       </article>
 
@@ -259,11 +261,11 @@
            <p class="lead">GÓI CAO CẤP <b class="blue">XÀI RIÊNG</b></p>
         </header>
         <div class="info">
-          <p class="row price-row"><b class="red price-term">XÁC MINH STUDENT</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">35K/NĂM</b></p>
+          <template data-price-group="spotify-1"></template>
           <p class="note">CHỈ XÁC MINH, KHÔNG CẤP ACC</p>
-          <p class="row price-row"><b class="red price-term">GÓI STUDENT</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">30K/THÁNG</b></p>
-          <p class="row price-row"><b class="red price-term">INDIVIDUAL / CÁ NHÂN</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">45K/THÁNG</b></p>
-          <p class="row price-row"><b class="red price-term">INDIVIDUAL / CÁ NHÂN</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">359K/NĂM</b></p>
+          
+          
+          
         </div>
       </article>
 
@@ -276,8 +278,8 @@
           <p class="lead">BẢN <b class="blue">ARTIST PRO</b> - NÂNG CHÍNH CHỦ</p>
         </header>
         <div class="info">
-          <p class="row price-row"><b class="red price-term">1 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">110K</b></p>
-          <p class="row price-row"><b class="red price-term">1 NĂM</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">520K</b></p>
+          <template data-price-group="soundcloud-1"></template>
+          
         </div>
       </article>
 
@@ -290,8 +292,8 @@
           <p class="lead">GÓI CAO CẤP <b class="blue">XÀI RIÊNG</b></p>
         </header>
         <div class="info">
-          <p class="row price-row"><b class="red price-term">VIP - 7 NGÀY</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">19K</b></p>
-          <p class="row price-row"><b class="red price-term">SVIP - 1 THÁNG</b><span class="old-price"></span><b class="green discount-label"></b><b class="final-price">90K</b></p>
+          <template data-price-group="meitu-1"></template>
+          
         </div>
       </article>
 
@@ -314,6 +316,8 @@
 
 
 
+<noscript>Vui lòng bật JavaScript để xem bảng giá hiện tại.</noscript>
 </body>
 
 </html>
+

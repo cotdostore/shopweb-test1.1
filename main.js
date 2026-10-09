@@ -204,9 +204,11 @@
   var t;
   function fitLater() { clearTimeout(t); t = setTimeout(fitAll, 120); }
 
+  window.addEventListener('prices-ready', fitAll);
   window.addEventListener('DOMContentLoaded', fitAll);
   window.addEventListener('load', fitAll);
   window.addEventListener('resize', fitLater);
   window.addEventListener('orientationchange', fitLater);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
 })();
+
