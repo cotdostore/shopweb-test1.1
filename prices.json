@@ -338,7 +338,7 @@
           "price": 19000,
           "oldPrice": 30000,
           "priceSuffix": "",
-          "available": true
+          "available": false
         },
         {
           "id": "capcut-pro-1-2",
@@ -359,7 +359,7 @@
         {
           "id": "capcut-pro-1-4",
           "term": "6 THÁNG",
-          "price": 289000,
+          "price": 249000,
           "oldPrice": null,
           "priceSuffix": "",
           "available": true
@@ -538,4 +538,3 @@
     }
   ]
 }
-
