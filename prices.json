@@ -343,7 +343,7 @@
         {
           "id": "capcut-pro-1-2",
           "term": "1 THÁNG",
-          "price": 49000,
+          "price": 39000,
           "oldPrice": 120000,
           "priceSuffix": "",
           "available": true
@@ -351,7 +351,7 @@
         {
           "id": "capcut-pro-1-3",
           "term": "3 THÁNG",
-          "price": 149000,
+          "price": 99000,
           "oldPrice": 360000,
           "priceSuffix": "",
           "available": true
@@ -359,7 +359,7 @@
         {
           "id": "capcut-pro-1-4",
           "term": "6 THÁNG",
-          "price": 249000,
+          "price": 239000,
           "oldPrice": null,
           "priceSuffix": "",
           "available": true
